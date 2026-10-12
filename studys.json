@@ -1,0 +1,957 @@
+[
+  {
+    "id": "2023.acl-long.240",
+    "title": "MvP: Multi-view Prompting Improves Aspect Sentiment Tuple Prediction",
+    "authors": "Zhibin Gou; Qingyan Guo; Yujiu Yang",
+    "year": 2023,
+    "venue": "acl",
+    "source": "acl_anthology",
+    "url": "https://aclanthology.org/2023.acl-long.240/",
+    "pdf_url": "https://aclanthology.org/2023.acl-long.240.pdf",
+    "task": [
+      "ASTE",
+      "TASD",
+      "ASQP",
+      "ACOS"
+    ],
+    "approach": [
+      "prompting/in-context learning"
+    ],
+    "domains": [
+      "restaurant",
+      "laptop",
+      "others"
+    ],
+    "training_data_size": [
+      "few",
+      "zero"
+    ],
+    "unlabeled_data_available": [
+      "unrelated"
+    ],
+    "notes": "0/10 shot learning mit ein paar llms in 2023\n\n"
+  },
+  {
+    "id": "2023.acl-long.686",
+    "title": "Bidirectional Generative Framework for Cross-domain Aspect-based Sentiment Analysis",
+    "authors": "Yue Deng; Wenxuan Zhang; Sinno Jialin Pan; Lidong Bing",
+    "year": 2023,
+    "venue": "acl",
+    "source": "acl_anthology",
+    "url": "https://aclanthology.org/2023.acl-long.686/",
+    "pdf_url": "https://aclanthology.org/2023.acl-long.686.pdf",
+    "task": [
+      "ASTE",
+      "others"
+    ],
+    "approach": [
+      "generative augmentation",
+      "weak/distant supervision"
+    ],
+    "domains": [
+      "laptop",
+      "restaurant",
+      "others"
+    ],
+    "training_data_size": [
+      "few"
+    ],
+    "unlabeled_data_available": [
+      true
+    ],
+    "notes": "T5, das zunächst ausschließlich mit den gelabelten Daten der Quell-Domäne (z. B. *Laptop*-Reviews) trainiert wird, um im **Text-to-Label**-Schritt initiale Pseudo-Labels für ungelabelte Ziel-Daten vorherzusagen und im **Label-to-Text**-Schritt daraus synthetische Ziel-Sätze zur Datenerweiterung zu generieren.\n\nDas **finale Modell** wird im **Text-to-Label**-Modus mit der kombinierten **Trainingsmenge** aus originalen Quell-Daten ($P_S$) und synthetisch erzeugten Ziel-Daten ($P_G$) trainiert.\nDamit löst es auf Ziel-Daten ohne echte Labels vier Cross-Domain-ABSA-**Tasks**: *Aspect Term Extraction* (ATE), *Unified ABSA* (UABSA), *Aspect Opinion Pair Extraction* (AOPE) und *Aspect Sentiment Triplet Extraction* (ASTE)."
+  },
+  {
+    "id": "2023.wassa-1.3",
+    "title": "Instruction Tuning for Few-Shot Aspect-Based Sentiment Analysis",
+    "authors": "Siddharth Varia; Shuai Wang; Kishaloy Halder; Robert Vacareanu; Miguel Ballesteros; Yassine Benajiba; Neha Anna John; Rishita Anubhai; Smaranda Muresan; Dan Roth",
+    "year": 2023,
+    "venue": "wassa",
+    "source": "acl_anthology",
+    "url": "https://aclanthology.org/2023.wassa-1.3/",
+    "pdf_url": "https://aclanthology.org/2023.wassa-1.3.pdf",
+    "task": [
+      "ASTE",
+      "TASD",
+      "ASQP"
+    ],
+    "approach": [
+      "prompting/in-context learning"
+    ],
+    "domains": [
+      "restaurant",
+      "laptop"
+    ],
+    "training_data_size": [
+      "few",
+      "full"
+    ],
+    "unlabeled_data_available": [
+      "unrelated"
+    ],
+    "notes": "Beispiele werden zusammen mit aufgabenbezogenen Instruktions-Prompts (Templates) formatiert und in Fragen-Antwort-Formate umgewandelt, die sowohl die Gesamtaufgabe (Quadrupel-Vorhersage) als auch Teilaufgaben (z. B. Erkennung von Aspect Term + Sentiment) abdecken. Das ganze für 5,10,20,50 gegebene beispiele je Kategorie (!!!!)"
+  },
+  {
+    "id": "2024.eacl-long.167",
+    "title": "A Weak Supervision Approach for Few-Shot Aspect Based Sentiment Analysis",
+    "authors": "Robert Vacareanu; Siddharth Varia; Kishaloy Halder; Shuai Wang; Giovanni Paolini; Neha Anna John; Miguel Ballesteros; Smaranda Muresan",
+    "year": 2024,
+    "venue": "eacl",
+    "source": "acl_anthology",
+    "url": "https://aclanthology.org/2024.eacl-long.167/",
+    "pdf_url": "https://aclanthology.org/2024.eacl-long.167.pdf",
+    "task": [
+      "ASTE",
+      "ASQP",
+      "TASD",
+      "others"
+    ],
+    "approach": [
+      "weak/distant supervision",
+      "unsupervised / rule-based"
+    ],
+    "domains": [
+      "restaurant",
+      "laptop"
+    ],
+    "training_data_size": [
+      "few"
+    ],
+    "unlabeled_data_available": [
+      true
+    ],
+    "notes": "* code: https://github.com/amazon-science/weak-supervision-for-few-shot-absa\n* k-Shot (nur k=5,10,20,50 Beispiele pro Klasse)\n* Das Paper fuegt einen Zwischenschritt namens NAPT zwischen Pretraining und Finetuning eines T5-Modells fuer ABSA ein. Dafuer wird aus unannotierten Reviews per Pipeline aus POS-Tagging, Opinion-Lexikon, NLI-Modell und Sentiment-Klassifikator automatisch ein verrauschter Datensatz mit Aspekt-Opinion-Sentiment-Tripeln erzeugt, auf dem das Modell per Instruction Tuning vortrainiert wird. Nach anschliessendem Finetuning auf echten annotierten Daten zeigt sich vor allem im Few-Shot- und Zero-Shot-Bereich ein deutlicher Leistungsgewinn von bis zu 15.84 Prozentpunkten F1, waehrend bei vollem Datensatz kein Nachteil entsteht. Im Zero-Shot-Setting ermoeglicht NAPT sogar erstmals die schwierigere Aspect Sentiment Triplet Extraction."
+  },
+  {
+    "id": "2024.findings-naacl.246",
+    "title": "Sentiment Analysis in the Era of Large Language Models: A Reality Check",
+    "authors": "Wenxuan Zhang; Yue Deng; Bing Liu; Sinno Pan; Lidong Bing",
+    "year": 2024,
+    "venue": "findings",
+    "source": "acl_anthology",
+    "url": "https://aclanthology.org/2024.findings-naacl.246/",
+    "pdf_url": "https://aclanthology.org/2024.findings-naacl.246.pdf",
+    "task": [
+      "ASTE",
+      "ASQP",
+      "others"
+    ],
+    "approach": [
+      "prompting/in-context learning"
+    ],
+    "domains": [
+      "laptop",
+      "restaurant",
+      "others"
+    ],
+    "training_data_size": [
+      "few",
+      "zero"
+    ],
+    "unlabeled_data_available": [
+      "unrelated"
+    ],
+    "notes": "0, 5, 10 shot learning, verwendung von ChatGPT prompting / und Flan-T5-xxl mit 11 Milliarden Parametern prompting. Beachte: LLMs mit die ersten die es gab.\n"
+  },
+  {
+    "id": "2024.acl-long.460",
+    "title": "BvSP: Broad-view Soft Prompting for Few-Shot Aspect Sentiment Quad Prediction",
+    "authors": "Yinhao Bai; Yalan Xie; Xiaoyi Liu; Yuhua Zhao; Zhixin Han; Mengting Hu; Hang Gao; Renhong Cheng",
+    "year": 2024,
+    "venue": "acl",
+    "source": "acl_anthology",
+    "url": "https://aclanthology.org/2024.acl-long.460/",
+    "pdf_url": "https://aclanthology.org/2024.acl-long.460.pdf",
+    "task": [
+      "ASQP"
+    ],
+    "approach": [
+      "others"
+    ],
+    "domains": [
+      "restaurant",
+      "hotel",
+      "others"
+    ],
+    "training_data_size": [
+      "few"
+    ],
+    "unlabeled_data_available": [
+      "unrelated"
+    ],
+    "notes": "BvSP löst Few-Shot Aspect Sentiment Quad Prediction, indem es aus 26 möglichen Text-Templates zunächst per Jensen-Shannon-Divergenz die k (meist 3) am stärksten korrelierenden Templates auswählt – dieser Auswahlschritt läuft einmalig auf dem kleinen Support-Set. Für jedes der k gewählten Templates wird anschließend ein eigener Prefix-Vektor auf einem eingefrorenen T5-base-Modell trainiert (Prefix-Tuning). Zur Inferenzzeit generiert das Modell für einen Testsatz k parallele Vorhersagen (eine je Template/Prefix), die per Mehrheits-Voting zu den finalen Quadrupeln aggregiert werden. Ergänzend stellen die Autoren den neuen, balancierteren Few-Shot-Datensatz FSQP vor und zeigen, dass BvSP bestehende Baselines wie GAS, DLO, ILO, MvP und ChatGPT deutlich übertrifft."
+  },
+  {
+    "id": "2024.wassa-1.6",
+    "title": "LLaMA-Based Models for Aspect-Based Sentiment Analysis",
+    "authors": "Jakub Šmíd; Pavel Priban; Pavel Kral",
+    "year": 2024,
+    "venue": "wassa, ws",
+    "source": "acl_anthology",
+    "url": "https://aclanthology.org/2024.wassa-1.6/",
+    "pdf_url": "https://aclanthology.org/2024.wassa-1.6.pdf",
+    "task": [
+      "ASTE",
+      "TASD",
+      "ASQP",
+      "ACOS"
+    ],
+    "approach": [
+      "prompting/in-context learning"
+    ],
+    "domains": [
+      "restaurant",
+      "laptop"
+    ],
+    "training_data_size": [
+      "few",
+      "zero"
+    ],
+    "unlabeled_data_available": [
+      "unrelated"
+    ],
+    "notes": "ChatGPT, Orca, Lllama (in verschiedenen größen) werden für zero-shot/few-shot betrachtet sowie llm fine-tuning (full finetuning)"
+  },
+  {
+    "id": "2024.emnlp-main.165",
+    "title": "MiniConGTS: A Near Ultimate Minimalist Contrastive Grid Tagging Scheme for Aspect Sentiment Triplet Extraction",
+    "authors": "Qiao Sun; Liujia Yang; Minghao Ma; Nanyang Ye; Qinying Gu",
+    "year": 2024,
+    "venue": "emnlp",
+    "source": "acl_anthology",
+    "url": "https://aclanthology.org/2024.emnlp-main.165/",
+    "pdf_url": "https://aclanthology.org/2024.emnlp-main.165.pdf",
+    "task": [
+      "ASTE"
+    ],
+    "approach": [
+      "prompting/in-context learning"
+    ],
+    "domains": [
+      "restaurant",
+      "laptop"
+    ],
+    "training_data_size": [
+      "few",
+      "zero"
+    ],
+    "unlabeled_data_available": [
+      "unrelated"
+    ],
+    "notes": "GPT-3.5 / GPT-4 in Zero-Shot, Few-Shot- und Chain-of-Thought (CoT)-Setups."
+  },
+  {
+    "id": "2024.findings-emnlp.460",
+    "title": "Is Compound Aspect-Based Sentiment Analysis Addressed by LLMs?",
+    "authors": "Yinhao Bai; Zhixin Han; Yuhua Zhao; Hang Gao; Zhuowei Zhang; Xunzhi Wang; Mengting Hu",
+    "year": 2024,
+    "venue": "findings",
+    "source": "acl_anthology",
+    "url": "https://aclanthology.org/2024.findings-emnlp.460/",
+    "pdf_url": "https://aclanthology.org/2024.findings-emnlp.460.pdf",
+    "task": [
+      "ASTE",
+      "TASD",
+      "ASQP",
+      "others"
+    ],
+    "approach": [
+      "prompting/in-context learning"
+    ],
+    "domains": [
+      "restaurant",
+      "laptop"
+    ],
+    "training_data_size": [
+      "zero",
+      "few"
+    ],
+    "unlabeled_data_available": [
+      "unrelated"
+    ],
+    "notes": "0, 1, 5, 10 shot. Vergleich mit IT-MTL bei allen Tasks. Prompting Ansatz wahrscheinlich ganz interessant."
+  },
+  {
+    "id": "2025.naacl-long.260",
+    "title": "Test-Time Code-Switching for Cross-lingual Aspect Sentiment Triplet Extraction",
+    "authors": "Dongming Sheng; Kexin Han; Hao Li; Yan Zhang; Yucheng Huang; Jun Lang; Wenqiang Liu",
+    "year": 2025,
+    "venue": "naacl",
+    "source": "acl_anthology",
+    "url": "https://aclanthology.org/2025.naacl-long.260/",
+    "pdf_url": "https://aclanthology.org/2025.naacl-long.260.pdf",
+    "task": [
+      "ASTE"
+    ],
+    "approach": [
+      "cross-lingual",
+      "generative augmentation",
+      "prompting/in-context learning"
+    ],
+    "domains": [
+      "restaurant"
+    ],
+    "training_data_size": [
+      "few",
+      "zero"
+    ],
+    "unlabeled_data_available": [
+      "unrelated"
+    ],
+    "notes": "Das Paper stellt das TT-CSW-Framework für sprachübergreifende Sentiment-Analysen vor, bei dem ganze Phrasen statt einzelner Wörter zwischen Sprachen ausgetauscht werden. Beim Testen erzeugt das System mehrere gemischt-sprachige Satzvarianten, um Vorhersagen zu generieren, diese zurückzuübersetzen und per Mehrheitsentscheid abzustimmen. Dies vermeidet abgeschnittene Begriffe und übertrifft im F1-Score sogar GPT-4. Zero-Shot und Few-Shot werden evaluiert, allerdings nur für die Baseline-Modelle (ChatGPT und GPT-4)."
+  },
+  {
+    "id": "2025.acl-long.41",
+    "title": "LACA: Improving Cross-lingual Aspect-Based Sentiment Analysis with LLM Data Augmentation",
+    "authors": "Jakub Šmíd; Pavel Priban; Pavel Kral",
+    "year": 2025,
+    "venue": "acl",
+    "source": "acl_anthology",
+    "url": "https://aclanthology.org/2025.acl-long.41/",
+    "pdf_url": "https://aclanthology.org/2025.acl-long.41.pdf",
+    "task": [
+      "ASTE"
+    ],
+    "approach": [
+      "cross-lingual",
+      "llm-based augmentation",
+      "llm-based annotation"
+    ],
+    "domains": [
+      "restaurant"
+    ],
+    "training_data_size": [
+      "zero"
+    ],
+    "unlabeled_data_available": [
+      true
+    ],
+    "notes": "1. Initiales Training (Quellsprache): Ein ABSA-Modell wird auf den reichlich vorhandenen, manuelle gelabelten Trainingsdaten der Quellsprache (z. B. Englisch) trainiert.; 2. Pseudo-Labeling (Zielsprache): Das trainierte Modell sagt Labels (z. B. Aspekte und Sentiments) für ungelabelte Texte der Zielsprache (z. B. Spanisch) voraus, was oft noch ungenau ist. ; 3. LLM Data Augmentation: Ein Sprachmodell nimmt diese ungenauen Pseudo-Labels und generiert daraus völlig neue, grammatikalisch korrekte Sätze in der Zielsprache, die exakt zu den Labels passen.; Re-Training: Das finale ABSA-Modell wird mit den ursprünglichen Quellsprach-Daten und den neu generierten Zielsprach-Daten gemeinsam gefinetuned."
+  },
+  {
+    "id": "2025.ranlp-1.152",
+    "title": "Aspect–Sentiment Quad Prediction with Distilled Large Language Models",
+    "authors": "Filippos Ventirozos; Peter Appleby; Matthew Shardlow",
+    "year": 2025,
+    "venue": "ranlp",
+    "source": "acl_anthology",
+    "url": "https://aclanthology.org/2025.ranlp-1.152/",
+    "pdf_url": "https://aclanthology.org/2025.ranlp-1.152.pdf",
+    "task": [
+      "ASQP",
+      "ACOS",
+      "ASTE"
+    ],
+    "approach": [
+      "prompting/in-context learning"
+    ],
+    "domains": [
+      "restaurant",
+      "laptop",
+      "hotel",
+      "others"
+    ],
+    "training_data_size": [
+      "zero",
+      "few"
+    ],
+    "unlabeled_data_available": [
+      "unrelated"
+    ],
+    "notes": "0-shot / 10-shot / 50-shot\ngemini / qwen \nverwendung von chat template"
+  },
+  {
+    "id": "2026.lrec-1.633",
+    "title": "Extending Czech Aspect-Based Sentiment Analysis with Opinion Terms: Dataset and LLM Benchmarks",
+    "authors": "Jakub Šmíd; Pavel Priban; Pavel Kral",
+    "year": 2026,
+    "venue": "lrec",
+    "source": "acl_anthology",
+    "url": "https://aclanthology.org/2026.lrec-1.633/",
+    "pdf_url": "https://lrec.elra.info/lrec2026-main-633",
+    "task": [
+      "ASTE",
+      "ASQP",
+      "ACOS"
+    ],
+    "approach": [
+      "prompting/in-context learning"
+    ],
+    "domains": [
+      "restaurant"
+    ],
+    "training_data_size": [
+      "few",
+      "zero"
+    ],
+    "unlabeled_data_available": [
+      "unrelated"
+    ],
+    "notes": "Tschechischer Datensatz, wo auch prompting evaluiert wurde, 0-shot und 10-shot mit vielen LLMs verschiedener Größen und Arten. \"We adopt prompts from prior Czech ABSA work (Šmíd et al., 2024a; Šmíd et al., 2026). Few-shot prompts use the first ten training examples\". "
+  },
+  {
+    "id": "2026.acl-long.2063",
+    "title": "CLAOCS-TX: Cross-Lingual Triplet Extraction with Aspect-Opinion-Aware Code-Switched Prompting and LLM-Guided Contrastive Distillation",
+    "authors": "Lipika Dewangan; Chandresh Kumar Maurya",
+    "year": 2026,
+    "venue": "acl",
+    "source": "acl_anthology",
+    "url": "https://aclanthology.org/2026.acl-long.2063/",
+    "pdf_url": "https://aclanthology.org/2026.acl-long.2063.pdf",
+    "task": [
+      "ASTE"
+    ],
+    "approach": [
+      "cross-lingual",
+      "llm-based augmentation"
+    ],
+    "domains": [
+      "restaurant",
+      "others"
+    ],
+    "training_data_size": [
+      "few"
+    ],
+    "unlabeled_data_available": [
+      true
+    ],
+    "notes": "Zuerst wird das Student-Modell (XLM-R-Encoder mit vier Heads für Aspekt-Tagging, Opinion-Tagging, Pairing und Sentiment) auf den gelabelten englischen Daten trainiert. Für jeden unlabeled Zielsprachen-Satz werden anschließend vier Code-Switch-Varianten erzeugt, bei denen jeweils nur die Aspekt-Spans, nur die Opinion-Spans, beide oder keine ins Englische übersetzt werden, während der restliche Satz in der Zielsprache bleibt. Diese Varianten werden mehrfach an ein eingefrorenes LLM (LLaMA-3-8B-Instruct) geschickt, das strukturierte Aspekt-Opinion-Sentiment-Triplets vorschlägt; die Antworten werden per Alignment-Funktion auf die Originalwörter im Zielsatz zurückgemappt und nur behalten, wenn sie über mehrere Varianten und Samples hinweg konsistent auftauchen. Mit diesen gefilterten Pseudo-Triplets wird der Student dann weitertrainiert, zusätzlich zu einem kontrastiven Distillationsziel, das die Triplet-Repräsentationen des Students an die des LLM angleicht; zur Inferenzzeit kommt anschließend nur noch das schlanke Student-Modell ohne LLM-Zugriff zum Einsatz.. Für jede Variante werden K=5 Samples gezogen (Temperature 0.7, top-p 0.9) → bis zu 20 LLM-Aufrufe pro Satz (4 Varianten × 5 Samples). Auch interessant: Umfasst einen self-consistency mechanismus: mindestens 2 verschiedenen Samples und mindestens 2 verschiedenen Varianten unterstützt werden."
+  },
+  {
+    "id": "2026.findings-acl.892",
+    "title": "E-ABSA20K: A Dataset and Propose-and-Verify for Aspect-Based Sentiment Analysis in Long E-commerce Reviews",
+    "authors": "Tong Sun; Mingyang Ma; Cheng Yu",
+    "year": 2026,
+    "venue": "findings",
+    "source": "acl_anthology",
+    "url": "https://aclanthology.org/2026.findings-acl.892/",
+    "pdf_url": "https://aclanthology.org/2026.findings-acl.892.pdf",
+    "task": [
+      "ASQP"
+    ],
+    "approach": [
+      "prompting/in-context learning"
+    ],
+    "domains": [
+      "others"
+    ],
+    "training_data_size": [
+      "few",
+      "zero"
+    ],
+    "unlabeled_data_available": [
+      "unrelated"
+    ],
+    "notes": "Neuer Datensatz, der LLM generierte Label umfasst... Kein human-labelled test set, auch test set llm annotiert. 0-shot und 4-shot bei romänischem datensatz. GPT-4-turbo, Gemini-2.5-Pro, Deepseek-v3.1, Deepseek-R1. E-Commerce-Bereich und deckt vier Produktkategorien. Es wird gesagt \"We will release the dataset for research use only\" aber er ist bis heute nicht veröffentlicht worden."
+  },
+  {
+    "id": "2-s2.0-85190793390",
+    "title": "Exploiting Duality in Aspect Sentiment Triplet Extraction With Sequential Prompting",
+    "authors": "Liu J.",
+    "year": 2024,
+    "venue": "IEEE Transactions on Knowledge and Data Engineering",
+    "source": "elsevier",
+    "url": "https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=85190793390&origin=inward",
+    "pdf_url": null,
+    "task": [
+      "ASTE"
+    ],
+    "approach": [
+      "prompting/in-context learning"
+    ],
+    "domains": [
+      "restaurant",
+      "laptop"
+    ],
+    "training_data_size": [
+      "few",
+      "zero"
+    ],
+    "unlabeled_data_available": [
+      true
+    ],
+    "notes": "interessant: chatgpt evaluiert mit 0 shot und 5 shot.interessant cot schlechter bei 5 shot als ohne cot."
+  },
+  {
+    "id": "2-s2.0-105036118880",
+    "title": "Evaluating Large Language Models for Arabic Aspect Sentiment Triplet Extraction using Zero, One, and Few-Shot Prompting",
+    "authors": "Nour R.",
+    "year": 2025,
+    "venue": "Proceedings of the 13th International Japan Africa Conference on Electronics Communications and Computations Jac Ecc 2025",
+    "source": "elsevier",
+    "url": "https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=105036118880&origin=inward",
+    "pdf_url": null,
+    "task": [
+      "ASTE"
+    ],
+    "approach": [
+      "prompting/in-context learning"
+    ],
+    "domains": [
+      "others"
+    ],
+    "training_data_size": [
+      "zero",
+      "few"
+    ],
+    "unlabeled_data_available": [
+      "unrelated"
+    ],
+    "notes": "arabische datensätze aber interessant: few shot besser als zero shot - bei dem aspekt zitierbar."
+  },
+  {
+    "id": "2-s2.0-85206887118",
+    "title": "Exploring large language models for the generation of synthetic training samples for aspect-based sentiment analysis in low resource settings",
+    "authors": "Hellwig N.C.",
+    "year": 2025,
+    "venue": "Expert Systems with Applications",
+    "source": "elsevier",
+    "url": "https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=85206887118&origin=inward",
+    "pdf_url": null,
+    "task": [
+      "TASD",
+      "others"
+    ],
+    "approach": [
+      "llm-based augmentation",
+      "token-level augmentation",
+      "generative augmentation"
+    ],
+    "domains": [
+      "restaurant"
+    ],
+    "training_data_size": [
+      "few",
+      "zero"
+    ],
+    "unlabeled_data_available": [
+      "unrelated"
+    ],
+    "notes": "llm erzeugt neue, annotierte beispiele. veergleich mit EDA. sowohl mit gpt 3.5 als auch llama. nutzt deutschen datensatz. wichtig: Rest16 o.ä. wurde nicht beachtet. sondern ein eigener datensatz."
+  },
+  {
+    "id": "2-s2.0-105008552973",
+    "title": "Evaluating zero-shot multilingual aspect-based sentiment analysis with large language models",
+    "authors": "Wu C.",
+    "year": 2025,
+    "venue": "International Journal of Machine Learning and Cybernetics",
+    "source": "elsevier",
+    "url": "https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=105008552973&origin=inward",
+    "pdf_url": null,
+    "task": [
+      "TASD",
+      "others"
+    ],
+    "approach": [
+      "prompting/in-context learning"
+    ],
+    "domains": [
+      "restaurant"
+    ],
+    "training_data_size": [
+      "zero"
+    ],
+    "unlabeled_data_available": [
+      "unrelated"
+    ],
+    "notes": "Die Ergebnisse zeigen, dass bei der anspruchsvolleren Triplet-Extraction (TASD: Aspekt + Kategorie + Sentiment, mit 12 vordefinierten Kategorien) die Performance gegenüber der binären Tuple-Prediction spürbar sinkt – für GPT-4o und Qwen-2.5 7B im Zero-Shot-Setting um 3.77 F1-Punkte, was die Autoren auf die zusätzliche Komplexität durch die Kategorie-Zuordnung zurückführen. \n\nAnders als bei der Tuple Prediction schneidet hier bei GPT-4o nicht Zero-Shot, sondern CoT-Prompting am besten ab (45.36 vs. 42.95 Avg-F1), während komplexere Multi-Turn-Strategien wie Self-Debate (39.29) und Self-Improvement (41.22) auch bei TASD schwächer bleiben. Qwen-2.5 7B liegt in allen Prompting-Strategien konsistent unter GPT-4o (z. B. Zero-Shot: 39.18 vs. 42.95), was den generellen Trend bestätigt, dass die Modellgröße/-kapazität bei zunehmender Aufgabenkomplexität noch wichtiger wird. Insgesamt schlussfolgern die Autoren, dass feingranulare multilinguale Triplet-Extraction eine tiefere Exploration und Optimierung von Prompt-Strategien erfordert, da die Modellperformance mit steigender Task-Komplexität deutlicher nachlässt."
+  },
+  {
+    "id": "2-s2.0-105034475274",
+    "title": "DASA: Data augmentation and syntactic analysis for cross-domain aspect sentiment triplet extraction",
+    "authors": "Kong X.",
+    "year": 2026,
+    "venue": "Neurocomputing",
+    "source": "elsevier",
+    "url": "https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=105034475274&origin=inward",
+    "pdf_url": null,
+    "task": [
+      "ASTE"
+    ],
+    "approach": [
+      "domain-adaption"
+    ],
+    "domains": [
+      "restaurant",
+      "laptop"
+    ],
+    "training_data_size": [
+      "few"
+    ],
+    "unlabeled_data_available": [
+      "unrelated"
+    ],
+    "notes": "DASA adressiert Cross-Domain Aspect Sentiment Triplet Extraction, bei der die Zieldomäne keine Labels besitzt. Zunächst werden Quelldomäne-Sätze mittels Konstituentenparsing und POS-Matching so umgebaut, dass Aspekt- und Opinion-Wörter durch passende Zieldomäne-Phrasen ersetzt werden, wobei ein BERT-Semantikfilter unsinnige Sätze und ein SenticNet-Check falsche Sentiment-Verschiebungen verhindert. Die so erzeugten, stilistisch an die Zieldomäne angepassten Trainingsdaten behalten dabei die Original-Labels der Quelldomäne. Für die eigentliche Extraktion werden BERT-Repräsentationen mit einem Graph-Attention-Netzwerk über syntaktische Dependency- und POS-Kombinations-Graphen angereichert, um Aspekt-Opinion-Zusammenhänge besser zu erfassen, bevor die Triplets per Table-Filling-Klassifikation aller Wortpaare vorhergesagt werden. Auf sechs Cross-Domain-Benchmarks übertrifft DASA damit bestehende State-of-the-Art-Methoden im Schnitt um 2,48 F1-Punkte."
+  },
+  {
+    "id": "10.1007/978-3-032-02551-7_4",
+    "title": "Few-Shot Cross-Lingual Aspect-Based Sentiment Analysis with Sequence-to-Sequence Models",
+    "authors": "Jakub ŠmídPavel PřibáňPavel Král",
+    "year": 2026,
+    "venue": "Text, Speech, and Dialogue",
+    "source": "springer",
+    "url": "https://link.springer.com/chapter/10.1007/978-3-032-02551-7_4",
+    "pdf_url": null,
+    "task": [
+      "ACOS",
+      "TASD",
+      "others"
+    ],
+    "approach": [
+      "cross-lingual"
+    ],
+    "domains": [
+      "restaurant"
+    ],
+    "training_data_size": [
+      "few",
+      "zero"
+    ],
+    "unlabeled_data_available": [
+      "unrelated"
+    ],
+    "notes": "Man nimmt die vollen englischen Trainingsdaten (hunderte/tausende Beispiele)\nfügt zusätzlich nur eine kleine Anzahl (1, 2, 5, 10, 20, 100, …) echter, gelabelter Beispiele aus der Zielsprache hinzu\n\nund trainiert das Modell (mT5/mBART) mit Gradient Descent auf dieser gemischten Menge – die Modellgewichte werden also tatsächlich angepasst"
+  },
+  {
+    "id": "10.1109/TKDE.2024.3392836",
+    "title": "Unified ABSA via Annotation-Decoupled Multi-Task Instruction Tuning",
+    "authors": "Z. Wang; R. Xia; J. Yu",
+    "year": 2024,
+    "venue": "IEEE Transactions on Knowledge and Data Engineering",
+    "source": "ieee",
+    "url": "https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10507027",
+    "pdf_url": "https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10507027",
+    "task": [
+      "ACOS"
+    ],
+    "approach": [
+      "others"
+    ],
+    "domains": [
+      "restaurant",
+      "laptop"
+    ],
+    "training_data_size": [
+      "zero",
+      "few"
+    ],
+    "unlabeled_data_available": [
+      "unrelated"
+    ],
+    "notes": "## TL;DR\n\nUNIFIEDABSA ist ein Multi-Task-Framework, das ausgehend von **nur einem** annotierten Compound-ABSA-Datensatz (z. B. Quadrupel-Daten wie ACOSQE mit Aspekt, Kategorie, Opinion, Sentiment) automatisch Trainingsdaten für **elf** verschiedene ABSA-Subtasks ableitet, indem einzelne Sentiment-Elemente aus den Quadrupel-Labels weggelassen werden (\"Annotation Decoupling\") – ohne dass für die Subtasks zusätzliche manuelle Annotationen benötigt werden. Jede so erzeugte Instanz wird in ein einheitliches Prompt-Schema (Unified Sentiment Instruction, USI) verpackt, das Task-Name, Sentiment-/Kategorie-Optionen und ein task-spezifisches Ausgabe-Template kombiniert, und alle elf Tasks werden als Text-zu-Text-Paraphrasierungsproblem auf einem einzigen T5-Modell gemeinsam trainiert (multi-task instruction tuning). Das Ziel ist \"one-model-for-all-tasks\": statt elf separater dedizierter Modelle nutzt ein einziges Modell die gemeinsamen Muster zwischen den Aufgaben. In umfangreichen Experimenten auf Quadrupel-, Triplet- und Pair-Datensätzen übertrifft UNIFIEDABSA dedizierte Single-Task-Baselines im Durchschnitt um 1–2% F1, wobei der Vorteil besonders in Low-Resource-Settings (K-Shot-Experimente, z. B. 32-shot) deutlich größer ausfällt und mit wachsender Datenmenge abnimmt. Ergänzende Analysen (Ablationen zu USI-Komponenten, Output-Format, Modellarchitektur, Task-Komplementarität und Task-Generalisierung) untermauern, dass sowohl die Instruktionsgestaltung als auch das gemeinsame Multi-Task-Lernen entscheidend zur Performance und Dateneffizienz beitragen.\n\ndas ganze wird auch für 1% des datensatzes evaluiert und ist da ganz gut, profitiert vom wissen aller vier sentiment elements."
+  },
+  {
+    "id": "10.1109/TAFFC.2024.3487870",
+    "title": "Mixture of Hybrid Prompts for Cross-Domain Aspect Sentiment Triplet Extraction",
+    "authors": "F. Yang; X. Zhou; M. Zhang; G. Zhou",
+    "year": 2025,
+    "venue": "IEEE Transactions on Affective Computing",
+    "source": "ieee",
+    "url": "https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10742472",
+    "pdf_url": "https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10742472",
+    "task": [
+      "ASTE"
+    ],
+    "approach": [
+      "domain-adaption"
+    ],
+    "domains": [
+      "restaurant",
+      "hotel",
+      "others"
+    ],
+    "training_data_size": [
+      "zero"
+    ],
+    "unlabeled_data_available": [
+      "unrelated"
+    ],
+    "notes": "Das Paper stellt HiPM vor, eine Methode für domänenübergreifende Aspect Sentiment Triplet Extraction: Ein T5-Modell wird mit gelabelten Daten aus einer Quelldomäne (z. B. Hotels) trainiert und soll dann unmarkierte Sätze aus einer Zieldomäne (z. B. Restaurants) korrekt in Aspekt-Meinung-Sentiment-Tripel zerlegen, obwohl die konkreten Wörter zwischen den Domänen kaum überlappen. Dazu erhält das Modell zwei zusätzliche Hilfestellungen als Prompts: einen syntaktisch ähnlichen Beispielsatz aus der Quelldomäne samt Lösung (Hard Prompt) sowie einen aus vortrainierten Kategorie-Prototypen gemischten Vektor, der auf Ähnlichkeiten der Aspekt-Kategorien zwischen den Domänen basiert (Soft Prompt). Auf zwölf Domänen-Transferpaaren übertrifft dieser Ansatz bisherige State-of-the-Art-Methoden im Schnitt um 1,48 % F1-Score."
+  },
+  {
+    "id": "10.1109/ICoAILO66760.2025.11155956",
+    "title": "Enhancing Sentiment Analysis Accuracy and Evaluating Task Affinity Using Large Language Models",
+    "authors": "K. Inoshita",
+    "year": 2025,
+    "venue": "2025 IEEE International Conference on Artificial Intelligence for Learning and Optimization (ICoAILO)",
+    "source": "ieee",
+    "url": "https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11155956",
+    "pdf_url": "https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11155956",
+    "task": [
+      "ASTE",
+      "ASQP"
+    ],
+    "approach": [
+      "prompting/in-context learning",
+      "llm-based annotation"
+    ],
+    "domains": [
+      "others"
+    ],
+    "training_data_size": [
+      "few",
+      "full"
+    ],
+    "unlabeled_data_available": [
+      "unrelated"
+    ],
+    "notes": "Unexplained inconsistency between Table III and Table IV. The 0-shot baseline for MAST-Hate is reported as 27.5 in Table III but as 29.3 (\"Base Prompt\") in Table IV; similarly MAST-Offensive (20.6 vs. 16.7) and MAST-Irony (30.8 vs. 32.1) differ. If these are meant to be the same condition, the discrepancy is left unaddressed and raises reproducibility concerns; if they are not the same condition, this needs to be stated explicitly.\nZero/near-zero results (e.g., ASQP: 0.0 across all six conditions) are reported without diagnosis. A flat 0.0 across zero-shot, few-shot, and all SFT variants is more consistent with an evaluation/parsing failure (e.g., strict string-match scoring against a rigid output format) than with a genuine capability ceiling. No qualitative error analysis, sample outputs, or discussion of failure modes is provided anywhere in the paper — a significant gap for a paper whose stated goal is to characterize \"task affinity.\""
+  },
+  {
+    "id": "10.1145/3747849",
+    "title": "Weakly Supervised Open-Domain Aspect-Based Sentiment Analysis",
+    "authors": "Chakraborty, Mohna; Kulkarni, Adithya; Li, Qi",
+    "year": 2025,
+    "venue": "ACM Trans. Knowl. Discov. Data",
+    "source": "acm",
+    "url": "https://doi.org/10.1145/3747849",
+    "pdf_url": null,
+    "task": [
+      "ASTE"
+    ],
+    "approach": [
+      "weak/distant supervision"
+    ],
+    "domains": [
+      "laptop",
+      "restaurant",
+      "others"
+    ],
+    "training_data_size": [
+      "zero"
+    ],
+    "unlabeled_data_available": [
+      true
+    ],
+    "notes": "Hier die komplette Pipeline für ASTE, aufgeteilt in **Trainingsphase** und **Inferenzphase** (das ist der Teil, der die eigentliche Tripel-Extraktion macht).\n\n## A) Trainingsphase (einmalig, um die Module zu lernen)\n\n**Schritt 1 — Weak Labels für Aspect-Opinion-Paare erzeugen**\nDependency-Parsing + die 5 Regeln (nsubj/conj/comp) extrahieren Aspect-Opinion-Paare aus dem unlabeled Korpus D. Nur Sätze, die die Regeln vollständig matchen, landen in D'_labeled (~25 % des Korpus).\n\n**Schritt 2 — Weak Sentiment-Labels erzeugen**\nFür jedes gefundene Aspect-Opinion-Paar wird via Prompt-Augmentierung + MLM-Ranking ein Sentiment (positiv/negativ) zugewiesen.\n\n**Schritt 3 — Vier Module gemeinsam trainieren**\nATE, OTE, ASOSE, OSASE werden parallel auf D'_labeled trainiert (BCE-Loss für Spans, CE-Loss für Sentiment in ASOSE/OSASE).\n\n**Schritt 4 — CCA als Stopp-Kriterium**\nNach jeder Epoche wird die kanonische Korrelation zwischen ATE↔OSASE und OTE↔ASOSE gemessen. Der Checkpoint mit maximaler Korrelation wird als \"richtig trainiert\" gewählt (verhindert Overfitting auf die verrauschten Weak Labels).\n\n**Schritt 5 — Self-Training**\nDas Modell labelt D'_unlabeled. Nur Sätze, bei denen **alle vier Module übereinstimmen** (symmetrische Mengendifferenz = 0, plus übereinstimmendes Sentiment von ASOSE/OSASE), werden als Pseudo-Labels in D'_labeled aufgenommen. Zurück zu Schritt 3, iterativ, bis kaum noch neue Pseudo-Labels dazukommen.\n\n## B) Inferenzphase — die eigentliche ASTE-Pipeline für einen neuen Satz\n\nDas ist der Teil, der dein \"was ist gegeben\" von vorhin praktisch löst:\n\n**Schritt 1 — ATE-Modul läuft zuerst**\nInput: nur der rohe Satz $R$.\nOutput: Menge von Aspect-Term-Kandidaten $A_p = \\{AT_1, AT_2, ...\\}$ (Start/End-Span-Vorhersage über BERT + Linear Layer).\n\n**Schritt 2 — OTE-Modul läuft parallel**\nInput: derselbe rohe Satz.\nOutput: Menge von Opinion-Term-Kandidaten $O_p = \\{OT_1, OT_2, ...\\}$.\n\n**Schritt 3 — ASOSE-Zweig: Aspect → Opinion+Sentiment**\nFür **jeden** von ATE vorhergesagten Aspect-Span $AT_i$:\n- Baue Input: `[CLS] AT_i [SEP] w1 w2 ... wk [SEP]` (Aspect wird vor den Satz gehängt)\n- BERT encodiert diesen kombinierten Input\n- Linear Layer auf den Token-Hidden-States sagt Start/End-Spans für den passenden Opinion-Term voraus\n- Linear Layer auf dem [CLS]-Embedding sagt das Sentiment voraus\n- Ergebnis: Kandidaten-Tripel $(AT_i, O_j, S_{ij})$\nFalls ATE keinen Aspect findet ($A_p = \\emptyset$), wird trotzdem mit leerem Präfix `[CLS] [SEP] Satz [SEP]` gearbeitet — das deckt implizite/null-Aspects ab.\n\n**Schritt 4 — OSASE-Zweig: Opinion → Aspect+Sentiment**\nSymmetrisch zu Schritt 3, aber ausgehend von den OTE-Opinion-Kandidaten: für jeden Opinion-Span wird der passende Aspect-Term + Sentiment vorhergesagt.\n\n**Schritt 5 — Matching/Aggregation beider Richtungen**\nDie Kandidaten-Tripel aus ASOSE (Schritt 3) und OSASE (Schritt 4) werden abgeglichen:\n- Findet sich dasselbe Aspect-Opinion-Paar **in beiden Richtungen wieder**, wird das Tripel mit dem zugehörigen Sentiment in die finale ASTE-Ausgabe übernommen — auch wenn ein Aspect- oder Opinion-Teil \"null\" ist.\n- Bei impliziten/nicht explizit erwähnten Termen kann das Modell dennoch ein Sentiment einem inferierten (nicht explizit vorhergesagten) Ziel zuweisen — das Paper nennt das eine \"latente\" Assoziationsfähigkeit, die manchmal zu unvollständigen, aber inhaltlich sinnvollen Tripeln führt.\n\n**Schritt 6 — Ausgabe**\nFinale Tripel-Liste $T = \\{(A_i, O_j, S_{ij}), ...\\}$ für den Satz.\n\n## Beispiel zur Veranschaulichung (aus Table 16)\n\nSatz: *\"The food was all good but it was way too mild.\"*\n- ATE findet: `food`\n- OTE findet: `good`, `too mild`\n- ASOSE (Input: `food` + Satz) findet zwei Opinion-Kandidaten dazu: `good` (positiv), `too mild` (negativ)\n- OSASE bestätigt beide Paare aus der Gegenrichtung\n- → finale Tripel: `(food, good, positive)` UND `(food, too mild, negative)` — das Modell handhabt hier korrekt **einen Aspect mit zwei gegensätzlichen Opinions**.\n\nDer Kern-Trick ist also: **ATE/OTE liefern die \"Startpunkte\", die bei ASTE sonst fehlen würden**, und die gegenseitige Bestätigung zwischen ASOSE/OSASE dient als Rausch-Filter für die aus schwacher Supervision gelernten, potenziell unsicheren Vorhersagen."
+  },
+  {
+    "id": "7f1df9be2afbd91316d23279ad9964ec317e7f21",
+    "title": "Rethinking ASTE: A Minimalist Tagging Scheme Alongside Contrastive Learning",
+    "authors": "Qiao Sun; Liujia Yang; Minghao Ma; Nanyang Ye; Qinying Gu",
+    "year": 2024.0,
+    "venue": "arXiv.org",
+    "source": "semantic_scholar",
+    "url": "https://www.semanticscholar.org/paper/7f1df9be2afbd91316d23279ad9964ec317e7f21",
+    "pdf_url": null,
+    "task": [
+      "ASTE"
+    ],
+    "approach": [
+      "prompting/in-context learning"
+    ],
+    "domains": [
+      "restaurant",
+      "laptop"
+    ],
+    "training_data_size": [
+      "few",
+      "zero"
+    ],
+    "unlabeled_data_available": [
+      "unrelated"
+    ],
+    "notes": "ansatz an sich irrelevant da er supervised ist aber es gibt für ASTE prompting baselines."
+  },
+  {
+    "id": "dc2c0ba9af4059b5a1b297ffbf58e2b3c40e8ef6",
+    "title": "Supervised and Few-Shot Learning for Aspect-Based Sentiment Analysis of Instruction Prompt",
+    "authors": "Jie Huang; Yunpeng Cui; Juan Liu; Ming Liu",
+    "year": 2024.0,
+    "venue": "Electronics",
+    "source": "semantic_scholar",
+    "url": "https://www.semanticscholar.org/paper/dc2c0ba9af4059b5a1b297ffbf58e2b3c40e8ef6",
+    "pdf_url": "https://www.mdpi.com/2079-9292/13/10/1924/pdf?version=1715683898",
+    "task": [
+      "ASTE",
+      "others"
+    ],
+    "approach": [
+      "prompting/in-context learning"
+    ],
+    "domains": [
+      "laptop",
+      "restaurant"
+    ],
+    "training_data_size": [
+      "few"
+    ],
+    "unlabeled_data_available": [
+      "unrelated"
+    ],
+    "notes": "Drei ABSA-Teilaufgaben mit einem generativen Modell lösen, statt für jede Aufgabe eine eigene Architektur zu bauen. ASC, AESC udn ASTE. \n\nDas Paper wandelt drei ABSA-Teilaufgaben (ASC, AESC, ASTE) in ein einheitliches Text-Generierungsproblem um: Ein T5-Modell bekommt einen Satz plus eine natürlichsprachliche Instruktions-Frage (z. B. \"What are the aspects and their opinions and sentiments?\") und generiert die Antwort als ganz normalen Satz (z. B. \"The place is tiny so it is bad\"), aus dem anschließend die Triplets (Aspekt, Opinion, Sentiment) zurückgeparst werden. Weil dieses Frage-Antwort-Format näher am ursprünglichen Pretraining von T5 liegt als klassische Klassifikations-/Tagging-Köpfe, kann das Modell sein vortrainiertes Wissen besser nutzen und übertrifft bisherige State-of-the-Art-Modelle. Der zentrale Beitrag ist die Few-Shot-Fähigkeit: Mit nur 5–40 Trainingsbeispielen pro Sentiment-Klasse (statt tausenden) erreicht das Modell bereits ~80 % der Leistung von vollem Training, was den Ansatz explizit für datenarme (low-resource) Szenarien geeignet macht."
+  },
+  {
+    "id": "d2b760eaa3a50f23f08f725eda25a42a1c6d2eca",
+    "title": "A Comprehensive Evaluation of Large Language Models on Aspect-Based Sentiment Analysis",
+    "authors": "Changzhi Zhou; Dandan Song; Yuhang Tian; Zhijing Wu; Hao Wang; Xinyu Zhang; Jun Yang; Ziyi Yang; Shuhao Zhang",
+    "year": 2024.0,
+    "venue": "arXiv.org",
+    "source": "semantic_scholar",
+    "url": "https://www.semanticscholar.org/paper/d2b760eaa3a50f23f08f725eda25a42a1c6d2eca",
+    "pdf_url": null,
+    "task": [
+      "ASTE",
+      "ASQP"
+    ],
+    "approach": [
+      "prompting/in-context learning"
+    ],
+    "domains": [
+      "laptop",
+      "restaurant"
+    ],
+    "training_data_size": [
+      "few",
+      "zero"
+    ],
+    "unlabeled_data_available": [
+      "unrelated"
+    ],
+    "notes": "Die Auswahl dieser 3 Demos erfolgt nach einer von drei Strategien (Abschnitt 3, \"Demonstration Selection Strategy\"):\n\nRandom-based: zufällige Auswahl aus dem Trainingsset\nBM25 (keyword-based): Sparse-Retrieval, das Sätze mit ähnlichen Schlüsselwörtern (Term Frequency, Inverse Document Frequency) zum Testsatz findet – gut für ähnliche Aspekt-/Opinion-Begriffe\nSimCSE (semantic-based): Dense-Retrieval via Sentence-Embeddings (kontrastives Lernen) – findet Sätze mit ähnlicher Bedeutung, nicht unbedingt gleichen Wörtern\n\nbeachten, dass für mich nur random relevant ist. allerdings fürs thema annotationstool irgendwann mal interessant zu sein.\n\nAufbau im Detail:\n\nInstruction (I): subtask-spezifisch formuliert, sagt dem LLM genau, welche Elemente es zurückgeben soll und in welchem Format (Python-Liste)\nDemonstrations (D): die 3 (im Beispiel gekürzt gezeigten) Beispielsätze mit ihrer korrekten Ziel-Liste – das \"Lernmaterial\" fürs Analogieschließen\nTested Sample (T): der eigentliche Satz, den das Modell klassifizieren soll (bei ALSC/AOE zusätzlich mit vorgegebenem Aspect-Term)\nOutput (Y): die vom LLM generierte Antwort – eine 2D-Liste mit den vorhergesagten Sentiment-Elementen\n\nDiese Prompt-Struktur ist einheitlich für alle 8 Subtasks (AE, OE, ALSC, AOE, AESC, AOPE, ASTE, ASQP) – nur Instruction und erwartetes Output-Format ändern sich je nach Subtask."
+  },
+  {
+    "id": "8d10cd24a8e1092c1f9ca984dc91c95ef6e3d36c",
+    "title": "QAIE: LLM-based Quantity Augmentation and Information Enhancement for few-shot Aspect-Based Sentiment Analysis",
+    "authors": "Hengyang Lu; Tian-ci Liu; Rui Cong; Jun Yang; Qiang Gan; Wei Fang; Xiaojun Wu",
+    "year": 2025.0,
+    "venue": "Information Processing & Management",
+    "source": "semantic_scholar",
+    "url": "https://www.semanticscholar.org/paper/8d10cd24a8e1092c1f9ca984dc91c95ef6e3d36c",
+    "pdf_url": null,
+    "task": [
+      "ASTE",
+      "TASD",
+      "ASQP"
+    ],
+    "approach": [
+      "llm-based augmentation",
+      "token-level augmentation",
+      "generative augmentation"
+    ],
+    "domains": [
+      "restaurant",
+      "laptop"
+    ],
+    "training_data_size": [
+      "few"
+    ],
+    "unlabeled_data_available": [
+      "unrelated"
+    ],
+    "notes": "augmentiert auch ein paar few-shot beispiele auf verschiedene arten. man muss aufpasen wie viele das sind. ich glaube es ist auch je kategorie. 5 shots heißt da glaub ich 5 je kategorie aber nicht sicher, muss geprüft werden."
+  },
+  {
+    "id": "3f776f7395c60f46e4bfb7542a60b0201a3f2cd1",
+    "title": "Large Language Models for Czech Aspect-Based Sentiment Analysis",
+    "authors": "Jakub Šmíd; P. Přibáň; Pavel Král",
+    "year": 2025.0,
+    "venue": "International Conference on Text, Speech and Dialogue",
+    "source": "semantic_scholar",
+    "url": "https://www.semanticscholar.org/paper/3f776f7395c60f46e4bfb7542a60b0201a3f2cd1",
+    "pdf_url": null,
+    "task": [
+      "ACOS",
+      "TASD",
+      "others"
+    ],
+    "approach": [
+      "prompting/in-context learning"
+    ],
+    "domains": [
+      "restaurant"
+    ],
+    "training_data_size": [
+      "zero",
+      "few"
+    ],
+    "unlabeled_data_available": [
+      "unrelated"
+    ],
+    "notes": "hier ist nur interessant, dass zero shot und few shot betrachtet wurden. "
+  },
+  {
+    "id": "439c498ab04168042228f538dff06d3dc477984b",
+    "title": "Advancing Cross-Lingual Aspect-Based Sentiment Analysis with LLMs and Constrained Decoding for Sequence-to-Sequence Models",
+    "authors": "Jakub Šmíd; P. Přibáň; Pavel Král",
+    "year": 2025.0,
+    "venue": "International Conference on Agents and Artificial Intelligence",
+    "source": "semantic_scholar",
+    "url": "https://www.semanticscholar.org/paper/439c498ab04168042228f538dff06d3dc477984b",
+    "pdf_url": "https://doi.org/10.5220/0013349400003890",
+    "task": [
+      "TASD",
+      "others"
+    ],
+    "approach": [
+      "cross-lingual"
+    ],
+    "domains": [
+      "restaurant"
+    ],
+    "training_data_size": [
+      "zero"
+    ],
+    "unlabeled_data_available": [
+      "unrelated"
+    ],
+    "notes": "# TL;DR\n\nDas Paper stellt einen Sequence-to-Sequence-Ansatz für cross-linguale Aspect-Based Sentiment Analysis (ABSA) vor, der ohne externe Übersetzungstools auskommt.\n\n## Ansatz\n- Modell (mT5 oder mBART) wird nur auf Englisch trainiert\n- Aspekte, Kategorien und Polarität werden als Text mit Markern generiert: [A] aspect [C] category [P] polarity\n- Mehrere Tripel werden mit [;] verkettet\n\n## Problem\n- Bei Anwendung auf andere Sprachen generiert das Modell oft englische statt fremdsprachige Aspektbegriffe\n\n## Lösung: Constrained Decoding\n- Schränkt beim Generieren die erlaubten nächsten Tokens ein\n- Aspektbegriffe müssen aus dem fremdsprachigen Input stammen\n- Kategorien und Polaritäten kommen nur aus festen Vokabularen\n\n## Vergleich\n- Getestet gegen GPT-4o mini (Zero-/Few-Shot) und feingetunte LLaMA 3 / LLaMA 3.1\n\n## Ergebnisse\n- Constrained Decoding verbessert Cross-lingual-Performance um bis zu 10 Prozent\n- mT5 schlägt mBART und GPT-4o mini deutlich\n- Nur feingetuntes LLaMA 3.1 erreicht ähnliche Werte wie mT5 mit Constrained Decoding, ist aber deutlich langsamer\n- Türkisch schneidet am schlechtesten ab, da einzige nicht-indoeuropäische Sprache im Testset"
+  },
+  {
+    "id": "579051d807c2028e259c89327212afa245308960",
+    "title": "MASTE: A Multi-Agent Pipeline for Zero-Shot Aspect Sentiment Triplet Extraction",
+    "authors": "Ao Hong; Lehan Wang; Zhirun Yue; Mingxin Wang; Zi-Han Wang; Houde Liu",
+    "year": 2026.0,
+    "venue": "",
+    "source": "semantic_scholar",
+    "url": "https://www.semanticscholar.org/paper/579051d807c2028e259c89327212afa245308960",
+    "pdf_url": null,
+    "task": [
+      "ASTE"
+    ],
+    "approach": [
+      "prompting/in-context learning"
+    ],
+    "domains": [
+      "laptop",
+      "restaurant"
+    ],
+    "training_data_size": [
+      "zero",
+      "few"
+    ],
+    "unlabeled_data_available": [
+      "unrelated"
+    ],
+    "notes": "MASTE löst Aspect Sentiment Triplet Extraction (ASTE): Aus einem Satz sollen alle Tripel (Aspekt, Meinung, Sentiment) extrahiert werden – komplett zero-shot, also ohne Training und ohne Beispiele im Prompt. Statt einen einzigen LLM-Call zu nutzen, wird die Aufgabe in 4 sequenzielle Agenten (= 4 LLM-Aufrufe hintereinander) zerlegt. Interessant ist, dass ein agentischer Ansatz gewählt wurde. Problem: nicht publiziert, offen ob code geht: https://github.com/Hankerlove/MASTE/tree/main/src"
+  },
+  {
+    "id": "2026.resourceful-4.8",
+    "title": "Annotation Quality in Aspect-Based Sentiment Analysis: A Case Study Comparing Experts, Students, Crowdworkers, and Large Language Models",
+    "authors": "Niklas Donhauser; Jakob Fehle; Nils Constantin Hellwig; Markus Weinberger; Udo Kruschwitz; Christian Wolff",
+    "year": 2026,
+    "venue": "resourceful, ws",
+    "source": "acl_anthology",
+    "url": "https://aclanthology.org/2026.resourceful-4.8/",
+    "pdf_url": "https://lrec.elra.info/lrec2026-ws-resourceful-08",
+    "task": [
+      "TASD",
+      "others"
+    ],
+    "approach": [
+      "llm-based annotation",
+      "prompting/in-context learning"
+    ],
+    "domains": [
+      "restaurant"
+    ],
+    "training_data_size": [
+      "few",
+      "full"
+    ],
+    "unlabeled_data_available": [
+      true
+    ],
+    "notes": "Eigene Arbeit. Fallstudie zur Annotationsqualitaet auf GERestaurant (deutsch, 1.000 Trainingssaetze + 924 Testsaetze). TASD (und ACSA) mit Experten, Studierenden, Crowdworkern und LLM (Gemma 3 27B, 30 Few-Shot-Beispiele, Majority Vote ueber 5 Seeds) als Annotatoren. Downstream: BERT, T5 (MvP), Gemma 3 27B mit 50 Few-Shot-Beispielen, LLaMA 3.1 8B Instruction-Finetuning."
+  }
+]
