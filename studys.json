@@ -291,33 +291,6 @@
     ]
   },
   {
-    "id": "2025.acl-long.41",
-    "title": "LACA: Improving Cross-lingual Aspect-Based Sentiment Analysis with LLM Data Augmentation",
-    "authors": "Jakub Šmíd; Pavel Priban; Pavel Kral",
-    "year": 2025,
-    "venue": "acl",
-    "source": "acl_anthology",
-    "url": "https://aclanthology.org/2025.acl-long.41/",
-    "pdf_url": "https://aclanthology.org/2025.acl-long.41.pdf",
-    "task": [
-      "ASTE"
-    ],
-    "approach": [
-      "cross-lingual",
-      "llm-based augmentation",
-      "llm-based annotation"
-    ],
-    "domains": [
-      "restaurant"
-    ],
-    "training_data_size": [
-      "zero"
-    ],
-    "unlabeled_data_available": [
-      true
-    ]
-  },
-  {
     "id": "2025.ranlp-1.152",
     "title": "Aspect–Sentiment Quad Prediction with Distilled Large Language Models",
     "authors": "Filippos Ventirozos; Peter Appleby; Matthew Shardlow",
